@@ -1,7 +1,7 @@
 import styles from './loader.module.css';
 
 export const Loader = () => {
-  return(
+  return (
     <div className={styles.background}>
       <div className={styles.image}></div>
       <div className={`${styles.image} ${styles.layer1}`}></div>

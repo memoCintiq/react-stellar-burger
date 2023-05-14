@@ -34,15 +34,15 @@ const App = () => {
         <Loader />
       ) : (
         <>
-        <AppHeader />
-        <main className={styles.main}>
-          <h1 className={`${styles.title} text text_type_main-large`}>
-            Соберите бургер
-          </h1>
-          <div className={styles.wrapper}></div>
-          <BurgerIngredients ingredients={ingredients} />
-          <BurgerConstructor ingredients={ingredients} />
-        </main>
+          <AppHeader />
+          <main className={styles.main}>
+            <h1 className={`${styles.title} text text_type_main-large`}>
+              Соберите бургер
+            </h1>
+            <div className={styles.wrapper}></div>
+            <BurgerIngredients ingredients={ingredients} />
+            <BurgerConstructor ingredients={ingredients} />
+          </main>
         </>
       )}
     </div>

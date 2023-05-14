@@ -61,17 +61,17 @@ const BurgerConstructor = ({ ingredients }) => {
         <ul className={`${styles.list} pt-5`}>
           {ingredients.map(
             (item) => item.type !== "bun" && (
-                <li key={item._id} className={`${styles.item} pb-4`}>
-                  <DragIcon type="primary" />
-                  <div className={`${styles.box} pl-2`}>
-                    <ConstructorElement
-                      text={item.name}
-                      price={item.price}
-                      thumbnail={item.image_mobile}
-                    />
-                  </div>
-                </li>
-              )
+              <li key={item._id} className={`${styles.item} pb-4`}>
+                <DragIcon type="primary" />
+                <div className={`${styles.box} pl-2`}>
+                  <ConstructorElement
+                    text={item.name}
+                    price={item.price}
+                    thumbnail={item.image_mobile}
+                  />
+                </div>
+              </li>
+            )
           )}
         </ul>
         <ConstructorElement

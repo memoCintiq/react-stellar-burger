@@ -1,9 +1,9 @@
 import {
-    BurgerIcon,
-    ListIcon,
-    Logo,
-    ProfileIcon,
-  } from "@ya.praktikum/react-developer-burger-ui-components";
+  BurgerIcon,
+  ListIcon,
+  Logo,
+  ProfileIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef, useState } from "react";
 import styles from "./app-header.module.css";
 
@@ -56,8 +56,9 @@ const AppHeader = () => {
       <nav className="pb-4 pt-4">
         <ul className={`${styles.list} pb-4 pt-4`}>
           <li
-            className={`${styles.item} ${
-              currentSection === section.burgerConstructor.type ? `${styles.disabled}` : ""
+            className={`${styles.item} ${currentSection === section.burgerConstructor.type
+              ? `${styles.disabled}`
+              : ""
             } pl-5 pr-5`}
             ref={sectionRefs[section.burgerConstructor.type]}
 
@@ -66,7 +67,7 @@ const AppHeader = () => {
             <BurgerIcon
               type={
                 currentSection === section.burgerConstructor.type ? "primary" : "secondary"
-              }/>
+              } />
             <p
               className={
                 currentSection === section.burgerConstructor.type
@@ -77,10 +78,10 @@ const AppHeader = () => {
             </p>
           </li>
           <li
-            className={`${styles.item} ${
-              currentSection === section.orderFeed.type ? `${styles.disabled}` : ""
-            }
-            pl-5`}
+            className={`${styles.item} ${currentSection === section.orderFeed.type
+              ? `${styles.disabled}`
+              : ""
+            } pl-5`}
             ref={sectionRefs[section.orderFeed.type]}
 
             onClick={() => selectSection(section.orderFeed.type)}>
@@ -88,7 +89,7 @@ const AppHeader = () => {
             <ListIcon
               type={
                 currentSection === section.orderFeed.type ? "primary" : "secondary"
-              }/>
+              } />
             <p
               className={
                 currentSection === section.orderFeed.type
@@ -99,10 +100,10 @@ const AppHeader = () => {
             </p>
           </li>
           <li
-            className={`${styles.item} ${
-              currentSection === section.profile.type ? `${styles.disabled}` : ""
-            }
-            pl-5`}
+            className={`${styles.item} ${currentSection === section.profile.type
+              ? `${styles.disabled}`
+              : ""
+            } pl-5`}
             ref={sectionRefs[section.profile.type]}
 
             onClick={() => selectSection(section.profile.type)}>
@@ -110,7 +111,8 @@ const AppHeader = () => {
             <ProfileIcon
               type={
                 currentSection === section.profile.type ? "primary" : "secondary"
-              }/>
+              }
+            />
             <p
               className={
                 currentSection === section.profile.type
