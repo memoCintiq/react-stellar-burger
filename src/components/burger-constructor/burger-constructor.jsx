@@ -40,10 +40,10 @@ const BurgerConstructor = ({ ingredients }) => {
   );
 
   const handleOpenModal = () => {
-    openModal(true);
+    openModal();
   };
   const handleCloseModal = () => {
-    closeModal(false);
+    closeModal();
   };
 
   return (

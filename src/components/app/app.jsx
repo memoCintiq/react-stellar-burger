@@ -13,15 +13,15 @@ const App = () => {
   const getIngredients = () => {
     setIsLoading(true);
     getData()
-    .then((res) => {
-      setIngredients(res.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      setIsLoading(false);
-    });
+      .then((res) => {
+        setIngredients(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -33,12 +33,17 @@ const App = () => {
       {isLoading ? (
         <Loader />
       ) : (
-          <><AppHeader /><main className={styles.main}>
-            <h1 className={`${styles.title} text text_type_main-large`}>Соберите бургер</h1>
-            <div className={styles.wrapper}></div>
-            <BurgerIngredients ingredients={ingredients} />
-            <BurgerConstructor ingredients={ingredients} />
-          </main></>
+        <>
+        <AppHeader />
+        <main className={styles.main}>
+          <h1 className={`${styles.title} text text_type_main-large`}>
+            Соберите бургер
+          </h1>
+          <div className={styles.wrapper}></div>
+          <BurgerIngredients ingredients={ingredients} />
+          <BurgerConstructor ingredients={ingredients} />
+        </main>
+        </>
       )}
     </div>
   );

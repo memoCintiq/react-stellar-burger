@@ -13,7 +13,7 @@ import styles from "./burger-ingredients.module.css";
 const BurgerIngredients = ({ ingredients }) => {
   const [currentTab, setCurrentTab] = useState("buns");
 
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const { isModalOpened, openModal, closeModal } = useModal();
 
   const tab = {
     buns: {
@@ -83,12 +83,11 @@ const BurgerIngredients = ({ ingredients }) => {
   });
 
   const handleOpenModalIngredient = (item) => {
-    openModal(true);
+    openModal();
     setCurrentTab(item);
   };
   const handleCloseModalIngredient = () => {
-    openModal(false);
-    closeModal(null);
+    closeModal();
   };
 
   return (
@@ -187,7 +186,7 @@ const BurgerIngredients = ({ ingredients }) => {
           </div>
         </div>
       </div>
-      {isModalOpen && (
+      {isModalOpened && (
         <Modal onClose={handleCloseModalIngredient} title="Детали ингредиента">
           <IngredientDetails ingredientDetails={currentTab} />
         </Modal>
