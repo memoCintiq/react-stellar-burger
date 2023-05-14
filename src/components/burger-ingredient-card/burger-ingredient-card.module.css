@@ -1,0 +1,20 @@
+.item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-direction: column;
+  max-width: 272px;
+  position: relative;
+}
+
+.counter {
+  position: fixed;
+}
+
+.price {
+  display: flex;
+}
+
+.text {
+  text-align: center;
+}

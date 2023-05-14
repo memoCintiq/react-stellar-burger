@@ -1,0 +1,45 @@
+.list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.number {
+  filter:
+  drop-shadow(0 4px 32px rgba(51, 51, 255, 0.5))
+  drop-shadow(0 0 8px rgba(51, 51, 255, 0.25))
+  drop-shadow(0 0 16px rgba(51, 51, 255, 0.25));
+  margin: 0;
+  max-width: 520px;
+}
+
+.text {
+  color: var(--text-inactive-color);
+}
+
+.check {
+  background-image: url(../../images/floating-purple-circles.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 102px;
+  position: relative;
+  width: 107px;
+}
+
+.icon {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

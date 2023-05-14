@@ -1,0 +1,32 @@
+.box {
+  background-color: var(--background);
+  border-radius: 40px;
+  left: 50%;
+  min-height: 538px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 720px;
+  z-index: 2;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.close {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  max-width: 24px;
+}

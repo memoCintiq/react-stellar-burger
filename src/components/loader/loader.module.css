@@ -1,0 +1,66 @@
+@keyframes up {
+  from {transform: rotate(0deg); }
+  50% {transform: rotate(180deg);}
+  100% {transform: rotate(360deg);}
+}
+
+.background {
+  background-color: #111111;
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: .6;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.image {
+	left: 50%;
+	margin-top: -70px;
+	top: 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation: up 1s;
+  border-bottom: none;
+  border-radius: 100%;
+  border-right: none;
+  border: 1px solid #702963;
+  height: 100px;
+  margin-left: -70px;
+  position: absolute;
+  transition: 2s;
+  width: 100px;
+}
+
+.layer1 {
+  animation-delay: .2s;
+  height: 90px;
+  left: 50.35%;
+  top: 50.7%;
+  width: 90px;
+}
+
+.layer2 {
+  animation-delay: .4s;
+  height: 80px;
+  left: 50.70%;
+  top: 51.4%;
+  width: 80px;
+}
+
+.layer3 {
+  animation-delay: .6s;
+  height: 70px;
+  left: 51.05%;
+  top: 52.1%;
+  width: 70px;
+}
+
+.layer4 {
+  animation-delay: .8s;
+  height: 60px;
+  left: 51.40%;
+  top: 52.8%;
+  width: 60px;
+}
