@@ -4,7 +4,7 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./app-header.module.css";
 
 const AppHeader = () => {
@@ -128,4 +128,4 @@ const AppHeader = () => {
   );
 };
 
-export default AppHeader;
+export default React.memo(AppHeader);

@@ -1,19 +1,36 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import useModal from "../../utils/hooks/useModal";
-import ingredientPropType from "../../utils/prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  closeIngredientDetailsModal,
+  deletePopupIngredient,
+  getData,
+  openIngredientDetailsModal,
+  setPopupIngredient,
+} from "../../services/actions/actions";
 import BurgerIngredientCard from "../burger-ingredient-card/burger-ingredient-card";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
+import Loader from "../loader/loader";
 import styles from "./burger-ingredients.module.css";
 
-// функциональный компонент, отображающий ингредиенты для бургера в виде вкладок с категориями булок, соусов и начинок
-const BurgerIngredients = ({ ingredients }) => {
+const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState("buns");
 
-  const { isModalOpened, openModal, closeModal } = useModal();
+  const {
+    burgerIngredients,
+    burgerIngredientsRequest,
+    burgerIngredientsFailed,
+  } = useSelector((state) => state.burgerIngredients);
+
+  const { isPopupIngredientOpened } = useSelector((state) => state.ingredientDetails);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getData());
+  }, [dispatch]);
 
   const tab = {
     buns: {
@@ -29,8 +46,6 @@ const BurgerIngredients = ({ ingredients }) => {
       type: "main",
     },
   };
-
-
 
   // Tabs and scrolling
 
@@ -52,18 +67,18 @@ const BurgerIngredients = ({ ingredients }) => {
   };
 
   const filteredBunIngredients = useMemo(() =>
-    ingredients.filter((ingredient) => ingredient.type === tab.buns.type),
-    [ingredients, tab.buns.type]
+    burgerIngredients.filter((ingredient) => ingredient.type === tab.buns.type),
+    [burgerIngredients, tab.buns.type]
   );
 
   const filteredSauceIngredients = useMemo(() =>
-    ingredients.filter((ingredient) => ingredient.type === tab.sauces.type),
-    [ingredients, tab.sauces.type]
+    burgerIngredients.filter((ingredient) => ingredient.type === tab.sauces.type),
+    [burgerIngredients, tab.sauces.type]
   );
 
   const filteredFillingIngredients = useMemo(() =>
-    ingredients.filter((ingredient) => ingredient.type === tab.fillings.type),
-    [ingredients, tab.fillings.type]
+    burgerIngredients.filter((ingredient) => ingredient.type === tab.fillings.type),
+    [burgerIngredients, tab.fillings.type]
   );
 
   const rootRef = useRef(null);
@@ -83,120 +98,121 @@ const BurgerIngredients = ({ ingredients }) => {
   });
 
   const handleOpenModalIngredient = (item) => {
-    openModal();
-    setCurrentTab(item);
+    dispatch(openIngredientDetailsModal());
+    dispatch(setPopupIngredient(item));
   };
   const handleCloseModalIngredient = () => {
-    closeModal();
+    dispatch(closeIngredientDetailsModal());
+    dispatch(deletePopupIngredient());
   };
 
-  return (
-    <>
-      <div className={`${styles.wrapper}`}>
+  if (burgerIngredientsRequest || burgerIngredientsFailed) {
+    return <Loader />;
+  } else {
+    return (
+      <>
+        <div className={`${styles.wrapper}`}>
 
-        <div className={`${styles.tabs} pt-5 pb-5`}>
-          <div ref={tabRefs[tab.buns.type]}>
-            <Tab
-              className={
-                currentTab === tab.buns.type ? `${styles.disabled}` : ""
-              }
-              active={bunIsInView}
-              onClick={() => selectTab(tab.buns.type)}
-            >
-              {tab.buns.name}
-            </Tab>
+          <div className={`${styles.tabs} pt-5 pb-5`}>
+            <div ref={tabRefs[tab.buns.type]}>
+              <Tab
+                className={
+                  currentTab === tab.buns.type ? `${styles.disabled}` : ""
+                }
+                active={bunIsInView}
+                onClick={() => selectTab(tab.buns.type)}
+              >
+                {tab.buns.name}
+              </Tab>
+            </div>
+            <div ref={tabRefs[tab.sauces.type]}>
+              <Tab
+                className={
+                  currentTab === tab.sauces.type ? `${styles.disabled}` : ""
+                }
+                active={sauceIsInView && !bunIsInView && !fillingIsInView}
+                onClick={() => selectTab(tab.sauces.type)}
+              >
+                {tab.sauces.name}
+              </Tab>
+            </div>
+            <div ref={tabRefs[tab.fillings.type]}>
+              <Tab
+                className={
+                  currentTab === tab.fillings.type ? `${styles.disabled}` : ""
+                }
+                active={fillingIsInView || (!bunIsInView && !sauceIsInView)}
+                onClick={() => selectTab(tab.fillings.type)}
+              >
+                {tab.fillings.name}
+              </Tab>
+            </div>
           </div>
-          <div ref={tabRefs[tab.sauces.type]}>
-            <Tab
-              className={
-                currentTab === tab.sauces.type ? `${styles.disabled}` : ""
-              }
-              active={sauceIsInView && !bunIsInView && !fillingIsInView}
-              onClick={() => selectTab(tab.sauces.type)}
-            >
-              {tab.sauces.name}
-            </Tab>
-          </div>
-          <div ref={tabRefs[tab.fillings.type]}>
-            <Tab
-              className={
-                currentTab === tab.fillings.type ? `${styles.disabled}` : ""
-              }
-              active={fillingIsInView || (!bunIsInView && !sauceIsInView)}
-              onClick={() => selectTab(tab.fillings.type)}
-            >
-              {tab.fillings.name}
-            </Tab>
+          <div className={`${styles.box} mt-5`} ref={rootRef}>
+            <div className="pb-5" id="buns" ref={inViewBunRef}>
+              <h2
+                className="text text_type_main-medium pb-1"
+                ref={tabRefs[tab.buns.type]}
+              >
+                {tab.buns.name}
+              </h2>
+              <ul className={`${styles.list} pt-5`}>
+                {filteredBunIngredients.map((ingredient) => (
+                  <li key={ingredient._id}>
+                    <BurgerIngredientCard
+                      ingredient={ingredient}
+                      onTab={handleOpenModalIngredient}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="pt-5 pb-5" id="sauces" ref={inViewSauceRef}>
+              <h2
+                className="text text_type_main-medium pb-1"
+                ref={tabRefs[tab.sauces.type]}
+              >
+                {tab.sauces.name}
+              </h2>
+              <ul className={`${styles.list} pt-5`}>
+                {filteredSauceIngredients.map((ingredient) => (
+                  <li key={ingredient._id}>
+                    <BurgerIngredientCard
+                      ingredient={ingredient}
+                      onTab={handleOpenModalIngredient}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="pt-5 pb-5" id="fillings" ref={inViewFillingRef}>
+              <h2
+                className="text text_type_main-medium pb-1"
+                ref={tabRefs[tab.fillings.type]}
+              >
+                {tab.fillings.name}
+              </h2>
+              <ul className={`${styles.list} pt-5`}>
+                {filteredFillingIngredients.map((ingredient) => (
+                  <li key={ingredient._id}>
+                    <BurgerIngredientCard
+                      ingredient={ingredient}
+                      onTab={handleOpenModalIngredient}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className={`${styles.box} mt-5`} ref={rootRef}>
-          <div className="pb-5" id="buns" ref={inViewBunRef}>
-            <h2
-              className="text text_type_main-medium pb-1"
-              ref={tabRefs[tab.buns.type]}
-            >
-              {tab.buns.name}
-            </h2>
-            <ul className={`${styles.list} pt-5`}>
-              {filteredBunIngredients.map((ingredient) => (
-                <li key={ingredient._id}>
-                  <BurgerIngredientCard
-                    ingredient={ingredient}
-                    onTab={handleOpenModalIngredient}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="pt-5 pb-5" id="sauces" ref={inViewSauceRef}>
-            <h2
-              className="text text_type_main-medium pb-1"
-              ref={tabRefs[tab.sauces.type]}
-            >
-              {tab.sauces.name}
-            </h2>
-            <ul className={`${styles.list} pt-5`}>
-              {filteredSauceIngredients.map((ingredient) => (
-                <li key={ingredient._id}>
-                  <BurgerIngredientCard
-                    ingredient={ingredient}
-                    onTab={handleOpenModalIngredient}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="pt-5 pb-5" id="fillings" ref={inViewFillingRef}>
-            <h2
-              className="text text_type_main-medium pb-1"
-              ref={tabRefs[tab.fillings.type]}
-            >
-              {tab.fillings.name}
-            </h2>
-            <ul className={`${styles.list} pt-5`}>
-              {filteredFillingIngredients.map((ingredient) => (
-                <li key={ingredient._id}>
-                  <BurgerIngredientCard
-                    ingredient={ingredient}
-                    onTab={handleOpenModalIngredient}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-      {isModalOpened && (
-        <Modal onClose={handleCloseModalIngredient} title="Детали ингредиента">
-          <IngredientDetails ingredientDetails={currentTab} />
-        </Modal>
-      )}
-    </>
-  );
+        {isPopupIngredientOpened && (
+          <Modal onClose={handleCloseModalIngredient} title="Детали ингредиента">
+            <IngredientDetails />
+          </Modal>
+        )}
+      </>
+    );
+  }
 };
 
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
-};
-
-export default BurgerIngredients;
+export default React.memo(BurgerIngredients);

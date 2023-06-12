@@ -1,3 +1,4 @@
+import React from "react";
 import styles from './loader.module.css';
 
 export const Loader = () => {
@@ -12,4 +13,4 @@ export const Loader = () => {
   )
 }
 
-export default Loader;
+export default React.memo(Loader);
