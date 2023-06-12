@@ -1,0 +1,51 @@
+.ingredient {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list {
+  height: 664px;
+  list-style-type: none;
+  overflow-y: scroll;
+  padding-left: 0;
+  margin: 0;
+}
+
+.list::-webkit-scrollbar {
+  background-color: var(--background-element);
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--text-inactive-color);
+}
+
+/* .buns {
+  margin-left: 32px;
+} */
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.box {
+  width: 100%;
+  display: flex;
+}
+
+.order {
+  display: flex;
+  gap: 40px;
+  justify-content: flex-end;
+  max-width: 552px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

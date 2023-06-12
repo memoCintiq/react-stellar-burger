@@ -1,0 +1,14 @@
+.overlay {
+  display: flex;
+  background-color: black;
+  cursor: pointer;
+  flex-direction: column;
+  height: 100vh;
+  opacity: .9;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  transition: visibility 0s linear .5s, opacity .5s linear;
+  width: 100%;
+  z-index: 1;
+}

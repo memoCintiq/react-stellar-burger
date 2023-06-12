@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+}
+
+.disabled {
+  cursor: default;
+}
+
+.box {
+  max-height: 664px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.box::-webkit-scrollbar {
+  background-color: var(--background-element);
+  width: 8px;
+}
+
+.box::-webkit-scrollbar-thumb {
+  background-color: var(--text-inactive-color);
+}
+
+.list {
+  display: grid;
+  gap: 32px 24px;
+  grid-template-columns: repeat(2, 1fr);
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
