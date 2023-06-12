@@ -3,7 +3,7 @@ import {
   DELETE_POPUP_INGREDIENT,
   OPEN_INGREDIENT_DETAILS_MODAL,
   SET_POPUP_INGREDIENT,
-} from '../actions/actions'
+} from '../actions/ingredient-details';
 
 const initialState = {
   popupIngredient: null,

@@ -4,7 +4,7 @@ import {
   POST_ORDER_FAILED,
   OPEN_ORDER_DETAILS_MODAL,
   CLOSE_ORDER_DETAILS_MODAL,
-} from '../actions/actions'
+} from '../actions/order-details';
 
 const initialState = {
   orderCurrent: null,
@@ -33,7 +33,8 @@ export const orderDetailsReducer = (state = initialState, action) => {
       return {
         ...state,
         orderFailed: true,
-        orderRequest: false
+        orderRequest: false,
+        orderCurrent: null
       };
     }
     case OPEN_ORDER_DETAILS_MODAL: {

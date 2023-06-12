@@ -11,11 +11,13 @@ import {
   addIngredientsConstructorBun,
   clearIngredientsConstructor,
   clearIngredientsConstructorBun,
+  moveIngredient,
+} from "../../services/actions/burger-constructor";
+import {
   closeOrderDetailsModal,
   openOrderDetailsModal,
   postOrder,
-  moveIngredient,
-} from "../../services/actions/actions";
+} from "../../services/actions/order-details";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
@@ -42,11 +44,11 @@ const BurgerConstructor = () => {
     [dispatch]
   );
 
-  const [{ isActive }, drop] = useDrop({
+  const [{ isHover }, drop] = useDrop({
     accept: "ingredient",
     drop: onDropHandler,
     collect: (monitor) => ({
-      isActive: monitor.canDrop() && monitor.isOver(),
+      isHover: monitor.canDrop() ,
     }),
   });
 
@@ -116,9 +118,19 @@ const BurgerConstructor = () => {
               />
             </li>
           ))}
-          {!bun && (
+          {!bun && !isHover &&(
             <p className={`text text_type_main-medium ${styles.text}`}>
-              Выберите булку и начинку
+              Выберите булку и начинку, перетянув направо
+            </p>
+          )}
+          {bun && nonBunsIngredients.length === 0 && !isHover && (
+            <p className={`text text_type_main-medium ${styles.text}`}>
+              Выберите начинку
+            </p>
+          )}
+          {nonBunsIngredients.length === 0 && isHover && (
+            <p className={`text text_type_main-medium ${styles.text}`}>
+              Перетягивайте сюда
             </p>
           )}
         </ul>

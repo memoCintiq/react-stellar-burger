@@ -1,7 +1,7 @@
 .ingredient {
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 75px 0 0 16px;
+  padding: 35px 0 0 16px;
   width: 600px;
   display: flex;
   flex-direction: column;
@@ -11,9 +11,9 @@
 .list {
   display: flex;
   flex-direction: column;
-  height: 464px;
+  height: 470px;
   list-style: none;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-left: 0;
 }
 
@@ -26,14 +26,10 @@
   background-color: var(--text-inactive-color);
 }
 
-/* .buns {
-  margin-left: 32px;
-} */
-
 .item {
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: flex-end;
 }
 
 .item:last-child {
@@ -54,7 +50,8 @@
 }
 
 .text {
-  font-size: 15px;
-  padding-top: 200px;
-  padding-right: 150px;
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+  width: 540px;
 }

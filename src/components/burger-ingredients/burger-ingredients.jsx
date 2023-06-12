@@ -2,13 +2,13 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
+import { getData } from "../../services/actions/burger-ingredients";
 import {
   closeIngredientDetailsModal,
   deletePopupIngredient,
-  getData,
   openIngredientDetailsModal,
   setPopupIngredient,
-} from "../../services/actions/actions";
+} from "../../services/actions/ingredient-details";
 import BurgerIngredientCard from "../burger-ingredient-card/burger-ingredient-card";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
