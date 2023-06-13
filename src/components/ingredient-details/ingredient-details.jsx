@@ -1,9 +1,13 @@
-import { useState } from "react";
-import ingredientPropType from "../../utils/prop-types";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Loader from "../loader/loader.jsx";
 import styles from "./ingredient-details.module.css";
 
-const IngredientDetails = ({ ingredientDetails }) => {
+const IngredientDetails = () => {
+  const popupIngredient = useSelector(
+    (state) => state.ingredientDetails.popupIngredient
+  );
+
   const [imageIsLoading, setImageIsLoading] = useState(false);
 
   const handleImageLoad = () => {
@@ -17,14 +21,14 @@ const IngredientDetails = ({ ingredientDetails }) => {
         className={`${styles.figure} pb-4`}
         style={{ opacity: imageIsLoading ? 1 : 0 }}>
         <img
-          src={ingredientDetails.image_large}
-          alt={ingredientDetails.name}
+          src={popupIngredient.image_large}
+          alt={popupIngredient.name}
           onLoad={handleImageLoad}
           onError={handleImageLoad}
         />
         <figcaption
           className={`${styles.caption} text text_type_main-medium pt-4`}>
-          {ingredientDetails.name}
+          {popupIngredient.name}
         </figcaption>
       </figure>
       <ul
@@ -36,7 +40,7 @@ const IngredientDetails = ({ ingredientDetails }) => {
             Калории, ккал
           </p>
           <p className={`${styles.text} text text_type_digits-default`}>
-            {ingredientDetails.calories}
+            {popupIngredient.calories}
           </p>
         </li>
         <li className={`${styles.item} mr-5`}>
@@ -44,7 +48,7 @@ const IngredientDetails = ({ ingredientDetails }) => {
             Белки, г
           </p>
           <p className={`${styles.text} text text_type_digits-default`}>
-            {ingredientDetails.proteins}
+            {popupIngredient.proteins}
           </p>
         </li>
         <li className={`${styles.item} mr-5`}>
@@ -52,7 +56,7 @@ const IngredientDetails = ({ ingredientDetails }) => {
             Жиры, г
           </p>
           <p className={`${styles.text} text text_type_digits-default`}>
-            {ingredientDetails.fat}
+            {popupIngredient.fat}
           </p>
         </li>
         <li className={`${styles.item} pb-15`}>
@@ -60,7 +64,7 @@ const IngredientDetails = ({ ingredientDetails }) => {
             Углеводы, г
           </p>
           <p className={`${styles.text} text text_type_digits-default`}>
-            {ingredientDetails.carbohydrates}
+            {popupIngredient.carbohydrates}
           </p>
         </li>
       </ul>
@@ -68,8 +72,4 @@ const IngredientDetails = ({ ingredientDetails }) => {
   );
 };
 
-IngredientDetails.propTypes = {
-  ingredientDetails: ingredientPropType.isRequired,
-};
-
-export default IngredientDetails;
+export default React.memo(IngredientDetails);

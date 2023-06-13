@@ -5,13 +5,25 @@ const checkResponse = (res) => {
   return Promise.reject(`Ошибка: ${res.status}`);
 };
 
-const settings = {
-  baseUrl: "https://norma.nomoreparties.space/api/ingredients",
-  headers: {
-    "Content-Type": "application/json",
-  },
+const baseUrl = 'https://norma.nomoreparties.space/api/';
+
+const request = (destination, options) => {
+  return fetch(`${baseUrl}${destination}`, options)
+    .then(checkResponse)
 };
 
-const getData = () => fetch(`${settings.baseUrl}`).then(checkResponse);
+const getIngredientsData = () => request('ingredients');
 
-export default getData;
+const postOrderData = (ingredients) => {
+  return request('orders', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ingredients,
+    }),
+  });
+};
+
+export { getIngredientsData, postOrderData };

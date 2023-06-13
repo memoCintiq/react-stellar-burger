@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 
-const ingredientPropType = PropTypes.shape({
+export const ingredientPropType = PropTypes.shape({
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+  image_mobile: PropTypes.string.isRequired,
+  image_large: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   calories: PropTypes.number.isRequired,
   proteins: PropTypes.number.isRequired,
@@ -13,4 +15,10 @@ const ingredientPropType = PropTypes.shape({
   image_large: PropTypes.string.isRequired,
 });
 
-export default ingredientPropType;
+export const orderDetailsPropType = PropTypes.shape({
+  order: PropTypes.number.isRequired,
+});
+
+export const totalPricePropType = PropTypes.shape({
+  price: PropTypes.number.isRequired,
+});

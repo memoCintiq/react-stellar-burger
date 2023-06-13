@@ -1,16 +1,20 @@
 .ingredient {
+  box-sizing: border-box;
   margin: 0 auto;
+  padding: 35px 0 0 16px;
+  width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .list {
-  height: 664px;
-  list-style-type: none;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  height: 470px;
+  list-style: none;
+  overflow-y: auto;
   padding-left: 0;
-  margin: 0;
 }
 
 .list::-webkit-scrollbar {
@@ -22,19 +26,14 @@
   background-color: var(--text-inactive-color);
 }
 
-/* .buns {
-  margin-left: 32px;
-} */
-
 .item {
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: flex-end;
 }
 
-.box {
-  width: 100%;
-  display: flex;
+.item:last-child {
+  padding-bottom: 0;
 }
 
 .order {
@@ -48,4 +47,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.text {
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+  width: 540px;
 }

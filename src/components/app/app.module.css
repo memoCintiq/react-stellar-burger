@@ -24,3 +24,10 @@
 .ingredients {
   max-width: 600px;
 }
+
+.error {
+  color: var(--colors-interface-error);
+  font-size: 25px;
+  margin-top: 10px;
+  text-align: center;
+}
